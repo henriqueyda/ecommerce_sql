@@ -9,22 +9,8 @@ CREATE TABLE tblAuxOrdersDataset(
 	order_estimated_delivery_date DATETIME
 )
 
-
-CREATE VIEW tblAuxOrdersDataset_VIEWAUX
-AS
-SELECT
-    order_id,
-    customer_id,
-    order_status,
-    order_purchase_timestamp,
-	order_approved_at,
-	order_delivered_carrier_date,
-	order_delivered_customer_date,
-	order_estimated_delivery_date
-FROM tblAuxOrdersDataset
-
 BULK INSERT tblAuxOrdersDataset
-FROM "C:\Users\h.yamamoto\Documents\Nivelamento SQL\55151_195341_bundle_archive\olist_orders_dataset.csv"
+FROM "C:\55151_195341_bundle_archive\olist_orders_dataset.csv"
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,

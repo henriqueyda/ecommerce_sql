@@ -8,21 +8,8 @@ CREATE TABLE tblAuxOrderReviews(
 	review_answer_timestamp DATETIME,
 )
 
-CREATE VIEW tblAuxOrderReviews_VIEWAUX
-AS
-SELECT
-    review_id,
-    order_id,
-    review_score,
-    review_comment_title,
-	review_comment_message,
-	review_creation_date,
-	review_answer_timestamp
-FROM tblAuxOrderReviews
-
-
 BULK INSERT tblAuxOrderReviews
-FROM "C:\Users\h.yamamoto\Documents\Nivelamento SQL\55151_195341_bundle_archive\olist_order_reviews_dataset.csv"
+FROM "C:\55151_195341_bundle_archive\olist_order_reviews_dataset.csv"
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,

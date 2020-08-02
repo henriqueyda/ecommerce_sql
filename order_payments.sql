@@ -8,7 +8,7 @@ CREATE TABLE tblAuxOrderPayments(
 
 
 BULK INSERT tblAuxOrderPayments
-FROM "C:\Users\h.yamamoto\Documents\Nivelamento SQL\55151_195341_bundle_archive\olist_order_payments_dataset.csv"
+FROM "C:\55151_195341_bundle_archive\olist_order_payments_dataset.csv"
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,
@@ -19,8 +19,6 @@ WITH (
     TABLOCK
 );
 
-select top 10 * from tblOrdersDataset
-
 CREATE TABLE tblOrderPayments(
 	Id_Payment INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     Id_Order INT,
@@ -30,18 +28,6 @@ CREATE TABLE tblOrderPayments(
 	Payment_Value FLOAT,
 	CONSTRAINT [FK_tblOrderPayments_tblOrdersDataset] FOREIGN KEY ([Id_Order]) REFERENCES [dbo].[tblOrdersDataset]([Id_Order])
 )
-
-		select
-			aux.order_id,
-			(select top 1 Id_Customer_2 from tblCustomer c where aux.customer_id = c.Id_Customer_2) as Id_Customer,
-			aux.order_status, 
-			aux.order_purchase_timestamp, 
-			aux.order_approved_at, 
-			aux.order_delivered_carrier_date, 
-			aux.order_delivered_customer_date, 
-			aux.order_estimated_delivery_date
-		from tblAuxOrdersDataset aux
-
 
 INSERT INTO tblOrderPayments(
 	Id_Order, 
@@ -59,7 +45,6 @@ INSERT INTO tblOrderPayments(
 		from tblAuxOrderPayments aux
 	)
 
-SELECT TOP 10 * from tblOrderPayments
 
 
 

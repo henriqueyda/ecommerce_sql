@@ -13,18 +13,9 @@ CREATE TABLE tblAuxLocalizacao
 	geolocation_state NVARCHAR(max)
 )
 
-CREATE VIEW tblAuxLocalizacao_VIEWAUX
-AS
-SELECT 
-	geolocation_zip_code_prefix,
-	geolocation_lat,
-	geolocation_lng,
-	geolocation_city,
-	geolocation_state
-FROM tblAuxLocalizacao
 
 BULK INSERT tblAuxLocalizacao
-FROM "C:\Users\h.yamamoto\Documents\Nivelamento SQL\55151_195341_bundle_archive\olist_geolocation_dataset.csv"
+FROM "C:\55151_195341_bundle_archive\olist_geolocation_dataset.csv"
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,
@@ -59,7 +50,7 @@ CREATE TABLE tblLocalizacao
 	Longitude FLOAT NOT NULL,
 	Latitude FLOAT NOT NULL,
 	Id_Cidade INT NOT NULL,
-	CONSTRAINT [FK_tblLocalizacao_tblCidade] FOREIGN KEY ([Id_Cidade]) REFERENCES [tblCidade]([Id_Cidade])
+		CONSTRAINT [FK_tblLocalizacao_tblCidade] FOREIGN KEY ([Id_Cidade]) REFERENCES [tblCidade]([Id_Cidade])
 )
 --SELECT CONVERT (FLOAT, '-23.577788975301495' )
 ----------- Importar dados
@@ -94,7 +85,7 @@ INSERT INTO tblLocalizacao(Zip_Code_Localizacao, Longitude, Latitude, Id_Cidade)
 	(select TOP 1 Id_Cidade from tblCidade C where C.Nome_Cidade = LTRIM(RTRIM(G.[geolocation_city])))
 	from tblAuxLocalizacao G
 )
-select top 10 * from tblEstado
+select top 10 * from tblLocalizacao
 
 
 -- inner join qtd cidade e estados

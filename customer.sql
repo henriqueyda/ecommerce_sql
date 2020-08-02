@@ -1,6 +1,3 @@
-DROP TABLE olist_customer_dataset_AUX
-DROP VIEW olist_customer_dataset_VIEWAUX
-
 -- Criação da tabela de Customer 
 CREATE TABLE tblAuxCustomersDataset(
     customer_id VARCHAR(50),
@@ -9,20 +6,9 @@ CREATE TABLE tblAuxCustomersDataset(
     customer_city VARCHAR(50),
     customer_state VARCHAR(2)
 )
-
-CREATE VIEW tblAuxCustomersDataset_VIEWAUX
-AS
-SELECT
-    customer_id,
-    customer_unique_id,
-    customer_zip_code_prefix,
-    customer_city,
-    customer_state
-FROM tblAuxCustomersDataset
-
  
 BULK INSERT tblAuxCustomersDataset
-FROM "C:\Users\h.yamamoto\Documents\Nivelamento SQL\55151_195341_bundle_archive\olist_customers_dataset.csv"
+FROM "C:\55151_195341_bundle_archive\olist_customers_dataset.csv"
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,
