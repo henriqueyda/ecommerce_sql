@@ -29,12 +29,6 @@ CREATE TABLE tblCustomer(
 )
 
 
-select aux.customer_id, aux.customer_unique_id, 
-(select top 1 l.Id_Localizacao from tblLocalizacao l
-	where aux.customer_zip_code_prefix = l.Zip_Code_Localizacao) 
-from tblAuxCustomersDataset aux
-	 
-
 INSERT INTO tblCustomer(Id_Customer_2, Id_Unique_Customer, Id_Localizacao)
 (
 	select aux.customer_id, aux.customer_unique_id, 
@@ -42,9 +36,3 @@ INSERT INTO tblCustomer(Id_Customer_2, Id_Unique_Customer, Id_Localizacao)
 		where aux.customer_zip_code_prefix = l.Zip_Code_Localizacao) 
 	from tblAuxCustomersDataset aux	
 )
-
-
-
-
-
-

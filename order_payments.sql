@@ -23,10 +23,11 @@ CREATE TABLE tblOrderPayments(
 	Id_Payment INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     Id_Order INT,
     Payment_Sequential INT,
-    Payment_Type VARCHAR(50),
+    Payment_Type INT,
     Payment_Installments INT,
 	Payment_Value FLOAT,
-	CONSTRAINT [FK_tblOrderPayments_tblOrdersDataset] FOREIGN KEY ([Id_Order]) REFERENCES [dbo].[tblOrdersDataset]([Id_Order])
+	CONSTRAINT [FK_tblOrderPayments_tblOrdersDataset] FOREIGN KEY ([Id_Order]) REFERENCES [dbo].[tblOrdersDataset]([Id_Order]),
+	CONSTRAINT [FK_tblOrderPayments_tblPaymentType] FOREIGN KEY ([Payment_Type]) REFERENCES [dbo].[tblPaymentType]([Id_Payment_Type])
 )
 
 INSERT INTO tblOrderPayments(
@@ -39,13 +40,12 @@ INSERT INTO tblOrderPayments(
 		SELECT
 			(SELECT TOP 1 Id_Order FROM tblOrdersDataset od WHERE aux.order_id = od.Id_Order_2),
 			aux.payment_sequential, 
-			aux.payment_type,
+			tblPaymentType.Id_Payment_Type,
 			aux.payment_installments,
 			aux.payment_value
 		from tblAuxOrderPayments aux
+		INNER JOIN tblPaymentType ON tblPaymentType.Payment_Type = aux.payment_type
 	)
-
-
 
 
 

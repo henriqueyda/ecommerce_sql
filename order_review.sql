@@ -52,7 +52,3 @@ INSERT INTO tblOrderReviews(
 		review_creation_date,
 		review_answer_timestamp
 	FROM tblAuxOrderReviews aux)
-
-SELECT top 10 * from tblOrderReviews
-
- 

@@ -18,16 +18,14 @@ WITH(
 )
 
 CREATE TABLE tblSellers(
-	Id_Seller VARCHAR(50) PRIMARY KEY,
+	Id_Seller INT IDENTITY(1,1) PRIMARY KEY,
+	Id_Seller_2 VARCHAR(50),
 	Seller_Localizacao INT,
 	CONSTRAINT [FK_tblSellers_tblLocalizacao] FOREIGN KEY([Seller_Localizacao]) REFERENCES [tblLocalizacao]([Id_Localizacao])
 )
 
-SELECT * from tblLocalizacao
-SELECT * from tblAuxSellers
-
 INSERT INTO tblSellers(
-	Id_Seller,
+	Id_Seller_2,
 	Seller_Localizacao
 )(
 SELECT seller_id,
