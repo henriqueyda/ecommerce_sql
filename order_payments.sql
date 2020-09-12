@@ -46,36 +46,3 @@ INSERT INTO tblOrderPayments(
 		from tblAuxOrderPayments aux
 		INNER JOIN tblPaymentType ON tblPaymentType.Payment_Type = aux.payment_type
 	)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

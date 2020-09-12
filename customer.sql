@@ -1,4 +1,4 @@
--- Criação da tabela de Customer 
+-- Customer table creation 
 CREATE TABLE tblAuxCustomersDataset(
     customer_id VARCHAR(50),
     customer_unique_id VARCHAR(50),

@@ -1,5 +1,5 @@
--- Queries nivelamento 
--- total de compras por mês/por cidade/por estado do vendedor do produto
+-- Advanced Queries
+-- Show sales amount per month/city/state
 
 select
 	seller.Id_Seller,
@@ -20,7 +20,7 @@ order by Id_Seller, Purchase_Month_Year
 
 select * from tblOrderReviews
 
---  pega o último ano em que houve venda, e mostra uma query com a média de total de venda de cada mês
+-- Show average sales amount per month in last year.
 
 declare @max_year int
 set @max_year = (select MAX(YEAR(orders.Order_Purchase_timestamp)) from tblOrdersDataset orders)
@@ -35,7 +35,7 @@ group by MONTH(orders.Order_Purchase_timestamp), YEAR(orders.Order_Purchase_time
 having YEAR(orders.Order_Purchase_timestamp) = @max_year
 order by Total_Amount
 
--- Qual produto teve o menor score do último ano ?
+-- Show product with lower score in last year.
 
 declare @max_year int
 set @max_year = (select MAX(YEAR(orders.Order_Purchase_timestamp)) from tblOrdersDataset orders)
@@ -51,7 +51,7 @@ group by orderitem.Id_Product, YEAR(orders.Order_Purchase_timestamp)
 having YEAR(orders.Order_Purchase_timestamp) = @max_year
 order by Average_Score ASC
 
--- No último ano, qual a média de tempo de resposta das reviews, em minutos.
+-- In the last year, show the average review response time in minutes.
 
 declare @max_year int
 set @max_year = (select MAX(YEAR(reviews.Review_Creation_Date)) from tblOrderReviews reviews)
@@ -65,7 +65,7 @@ group by month(reviews.Review_Creation_Date), year(reviews.Review_Creation_Date)
 having year(reviews.Review_Creation_Date) = @max_year
 order by Response_Time_Average
 
---faturamento acumulado até agosto de 2017 e faturamento mês a mês no resto
+-- Show cumulative sales volume until August 2017 and monthly income until last date.
 
 create table tblFaturamento(
 	Price FLOAT,
